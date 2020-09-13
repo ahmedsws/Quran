@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quran/home/application/bloc/home_bloc.dart';
 
 class CataloguePage extends StatelessWidget {
   const CataloguePage();
@@ -16,26 +18,7 @@ class CataloguePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            flex: 0,
-            child: Text(
-              'Assalamualaikum',
-              style: style.apply(
-                color: accentColor,
-              ),
-            ),
-          ),
-          Expanded(
             flex: 1,
-            child: Text(
-              'Tanvir ahassan',
-              style: style.apply(
-                color: accentColor,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Expanded(
-            flex: 3,
             child: Stack(
               children: [
                 Image.asset(
@@ -56,7 +39,7 @@ class CataloguePage extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 5,
+            flex: 3,
             child: Taby(),
           ),
         ],
@@ -100,10 +83,13 @@ class Taby extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 5,
+            flex: 7,
             child: TabBarView(
               children: [
-                SurahPage(),
+                BlocProvider(
+                  create: (context) => HomeBloc()..add(GetHome()),
+                  child: SurahPage(),
+                ),
                 Text('data'),
                 Text('data'),
                 Text('data'),
@@ -122,78 +108,104 @@ class SurahPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.bodyText1;
-    return ListView.builder(
-      itemBuilder: (context, index) => Container(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 20,
-            horizontal: 5,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Stack(
-                alignment: Alignment.center,
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) => state is HomeLoading
+          ? Center(
+              child: Text('Loading...'),
+            )
+          : SingleChildScrollView(
+              child: Column(
                 children: [
-                  Image.asset(
-                    'assets/icons/ayahNumBorder.png',
-                    height: MediaQuery.of(context).size.height * .07,
-                  ),
-                  Text(
-                    '${++index}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .apply(color: Colors.black),
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Al-Fatiha',
-                    style: style.copyWith(
-                      fontSize: MediaQuery.of(context).size.width / 20,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'MECCAN',
-                        style: style.copyWith(
-                            fontSize: MediaQuery.of(context).size.width / 30,
-                            color: Colors.black45),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: CircleAvatar(
-                          radius: 3,
-                          backgroundColor: Colors.black26,
+                  ...state.quran.surahs.map(
+                    (surah) => Container(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20,
+                          horizontal: 5,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/ayahNumBorder.png',
+                                  height:
+                                      MediaQuery.of(context).size.height * .07,
+                                ),
+                                Text(
+                                  '${surah.number}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      .apply(color: Colors.black),
+                                )
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  surah.englishName,
+                                  style: style.copyWith(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width / 20,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      surah.revelationType,
+                                      style: style.copyWith(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              30,
+                                          color: Colors.black45),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: CircleAvatar(
+                                        radius: 3,
+                                        backgroundColor: Colors.black26,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${surah.ayahs.length}',
+                                      style: style.copyWith(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width /
+                                                30,
+                                        color: Colors.black45,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Text(
+                              surah.number == 1
+                                  ? 'الفاتحة'
+                                  : surah.name.substring(5),
+                              style: GoogleFonts.amiri().copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 20),
+                            )
+                          ],
                         ),
                       ),
-                      Text(
-                        '7 VERSES',
-                        style: style.copyWith(
-                            fontSize: MediaQuery.of(context).size.width / 30,
-                            color: Colors.black45),
-                      ),
-                    ],
-                  )
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.black,
+                  ),
                 ],
               ),
-              Text(
-                'الفاتحة',
-                style: GoogleFonts.amiri().copyWith(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: MediaQuery.of(context).size.width / 20),
-              )
-            ],
-          ),
-        ),
-      ),
-      itemCount: 4,
+            ),
     );
   }
 }

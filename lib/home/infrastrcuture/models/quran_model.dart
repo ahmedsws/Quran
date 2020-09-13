@@ -3,9 +3,12 @@ import 'package:quran/home/domain/entities/quran.dart';
 import 'surah_model.dart';
 
 class QuranModel extends Quran {
-  QuranModel({this.surahs});
-  List<SurahModel> surahs;
+  const QuranModel({List<SurahModel> surahs}) : super(surahs: surahs);
 
-  factory QuranModel.fromJson(Map<String, dynamic> json) =>
-      QuranModel(surahs: json['surahs']);
+  QuranModel.fromJson(Map<String, dynamic> json)
+      : super(
+          surahs: List.from(json['surahs'])
+              .map((surah) => SurahModel.fromJson(surah))
+              .toList(),
+        );
 }

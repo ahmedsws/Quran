@@ -70,10 +70,11 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.white,
       elevation: 0.0,
       leading: InkWell(
-        child: Image.asset(
-          'assets/icons/menu.png',
-          height: 2,
-          width: 2,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Image.asset(
+            'assets/icons/menu.png',
+          ),
         ),
         onTap: () {},
       ),

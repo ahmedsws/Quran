@@ -3,14 +3,30 @@ import 'package:quran/home/domain/entities/surah.dart';
 import 'ayah_model.dart';
 
 class SurahModel extends Surah {
-  const SurahModel(
-      {this.number,
-      this.name,
-      this.englishName,
-      this.englishNameTranslation,
-      this.revelationType,
-      this.ayahs});
-  final int number;
-  final String name, englishName, englishNameTranslation, revelationType;
-  final List<AyahModel> ayahs;
+  const SurahModel({
+    int number,
+    String name,
+    englishName,
+    englishNameTranslation,
+    revelationType,
+    List<AyahModel> ayahs,
+  }) : super(
+          number: number,
+          englishName: englishName,
+          englishNameTranslation: englishNameTranslation,
+          revelationType: revelationType,
+          ayahs: ayahs,
+        );
+
+  SurahModel.fromJson(Map<String, dynamic> json)
+      : super(
+          number: json['number'],
+          name: json['name'],
+          englishName: json['englishName'],
+          englishNameTranslation: json['englishNameTranslation'],
+          revelationType: json['revelationType'],
+          ayahs: List.from(json['ayahs'])
+              .map((ayah) => AyahModel.fromJson(ayah))
+              .toList(),
+        );
 }

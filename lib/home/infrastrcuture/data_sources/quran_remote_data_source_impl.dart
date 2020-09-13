@@ -11,7 +11,7 @@ class QuranRemoteDataSourceImpl implements QuranRemoteDataSource {
 
     final response = await http.get(url);
     final data = jsonDecode(response.body);
-
-    return QuranModel.fromJson(data);
+    // print('${QuranModel.fromJson(data)} heyyyyy');
+    return QuranModel.fromJson(data['data']);
   }
 }
