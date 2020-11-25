@@ -2,14 +2,14 @@ import 'package:quran/home/domain/entities/ayah.dart';
 
 class AyahModel extends Ayah {
   const AyahModel({
-    int number,
-    numberInSurah,
-    juz,
-    manzil,
-    page,
-    ruku,
-    hizbQuarter,
-    String text,
+    int? number,
+    int? numberInSurah,
+    int? juz,
+    int? manzil,
+    int? page,
+    int? ruku,
+    int? hizbQuarter,
+    String? text,
     // bool sajda,
   }) : super(
           number: number,

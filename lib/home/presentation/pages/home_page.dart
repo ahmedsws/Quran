@@ -3,7 +3,7 @@ import 'package:quran/home/presentation/pages/catalogue_page.dart';
 import 'package:quran/home/presentation/widgets/navigation_base.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage();
 
   @override
   Widget build(BuildContext context) {

@@ -4,12 +4,12 @@ import 'ayah_model.dart';
 
 class SurahModel extends Surah {
   const SurahModel({
-    int number,
-    String name,
-    englishName,
-    englishNameTranslation,
-    revelationType,
-    List<AyahModel> ayahs,
+    int? number,
+    String? name,
+    String? englishName,
+    String? englishNameTranslation,
+    String? revelationType,
+    List<AyahModel>? ayahs,
   }) : super(
           number: number,
           englishName: englishName,
@@ -20,7 +20,7 @@ class SurahModel extends Surah {
 
   SurahModel.fromJson(Map<String, dynamic> json)
       : super(
-          number: json['number'],
+          number: json['number'] ?? 0,
           name: json['name'],
           englishName: json['englishName'],
           englishNameTranslation: json['englishNameTranslation'],

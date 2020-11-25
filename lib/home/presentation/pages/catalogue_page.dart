@@ -8,7 +8,7 @@ class CataloguePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = Theme.of(context).textTheme.bodyText1;
+    final style = Theme.of(context).textTheme.bodyText1!;
     final primaryColor = Theme.of(context).primaryColor;
     final accentColor = Theme.of(context).accentColor;
     final size = MediaQuery.of(context).size;
@@ -49,7 +49,7 @@ class CataloguePage extends StatelessWidget {
 }
 
 class Taby extends StatelessWidget {
-  const Taby({Key key}) : super(key: key);
+  const Taby();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class Taby extends StatelessWidget {
           Expanded(
             child: TabBar(
               unselectedLabelColor: Theme.of(context).accentColor,
-              labelStyle: Theme.of(context).textTheme.bodyText1.copyWith(
+              labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
                     fontWeight: FontWeight.w800,
                     fontSize: MediaQuery.of(context).size.width / 25,
                   ),
@@ -103,11 +103,11 @@ class Taby extends StatelessWidget {
 }
 
 class SurahPage extends StatelessWidget {
-  const SurahPage({Key key}) : super(key: key);
+  const SurahPage();
 
   @override
   Widget build(BuildContext context) {
-    final style = Theme.of(context).textTheme.bodyText1;
+    final style = Theme.of(context).textTheme.bodyText1!;
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) => state is HomeLoading
           ? Center(
@@ -138,7 +138,7 @@ class SurahPage extends StatelessWidget {
                                   '${surah.number}',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText1
+                                      .bodyText1!
                                       .apply(color: Colors.black),
                                 )
                               ],
@@ -147,7 +147,7 @@ class SurahPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  surah.englishName,
+                                  surah.englishName ?? '',
                                   style: style.copyWith(
                                     fontSize:
                                         MediaQuery.of(context).size.width / 20,
@@ -156,7 +156,7 @@ class SurahPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      surah.revelationType,
+                                      surah.revelationType ?? '',
                                       style: style.copyWith(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -173,7 +173,7 @@ class SurahPage extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      '${surah.ayahs.length}',
+                                      '${surah.ayahs ?? [].length}',
                                       style: style.copyWith(
                                         fontSize:
                                             MediaQuery.of(context).size.width /
@@ -188,7 +188,7 @@ class SurahPage extends StatelessWidget {
                             Text(
                               surah.number == 1
                                   ? 'الفاتحة'
-                                  : surah.name.substring(5),
+                                  : surah.name ?? ''.substring(5),
                               style: GoogleFonts.amiri().copyWith(
                                   color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.bold,

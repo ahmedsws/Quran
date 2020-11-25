@@ -9,7 +9,7 @@ class Ayah {
       this.hizbQuarter,
       this.text,
       this.sajda});
-  final int number, numberInSurah, juz, manzil, page, ruku, hizbQuarter;
-  final String text;
-  final bool sajda;
+  final int? number, numberInSurah, juz, manzil, page, ruku, hizbQuarter;
+  final String? text;
+  final bool? sajda;
 }

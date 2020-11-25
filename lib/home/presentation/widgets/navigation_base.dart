@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class NavigationBase extends StatefulWidget {
   const NavigationBase({this.tabs});
-  final List<StatelessWidget> tabs;
+  final List<Widget>? tabs;
   @override
   _NavigationBase createState() => _NavigationBase();
 }
@@ -47,7 +47,7 @@ class _NavigationBase extends State<NavigationBase> {
             });
           },
         ),
-        body: widget.tabs[_page]);
+        body: widget.tabs![_page]);
   }
 }
 
@@ -61,7 +61,7 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
         'Quran App',
         style: Theme.of(context)
             .textTheme
-            .bodyText1
+            .bodyText1!
             .apply(
               color: Theme.of(context).primaryColor,
             )

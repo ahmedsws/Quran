@@ -8,7 +8,7 @@ class Surah {
       this.englishNameTranslation,
       this.revelationType,
       this.ayahs});
-  final int number;
-  final String name, englishName, englishNameTranslation, revelationType;
-  final List<Ayah> ayahs;
+  final int? number;
+  final String? name, englishName, englishNameTranslation, revelationType;
+  final List<Ayah>? ayahs;
 }

@@ -15,7 +15,7 @@ class AppBase extends StatelessWidget {
         primaryColor: Color(0xFF672CBC),
         accentColor: Color(0xFF8789A3),
       ),
-      home: HomePage(),
+      home: StartPage(),
     );
   }
 }

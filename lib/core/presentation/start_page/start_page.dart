@@ -7,7 +7,7 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = Theme.of(context).textTheme.bodyText1;
+    final style = Theme.of(context).textTheme.bodyText1!;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -55,7 +55,7 @@ class StartPage extends StatelessWidget {
                       child: Button(
                         text: 'Get Started',
                         onPressed: () {
-                          Navigator.of(context).push(
+                          Navigator.of(context)!.push(
                             MaterialPageRoute(builder: (context) => HomePage()),
                           );
                         },
